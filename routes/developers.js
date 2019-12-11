@@ -2,7 +2,7 @@ const router = require("express").Router();
 const database = require("../config/database");
 const Developer = require("../models/developer");
 
-router.route("/").get(async (req, res) => {
+router.route("/devs").get(async (req, res) => {
   try {
     const developer = await Developer.findAll();
     res.json(developer);
@@ -12,60 +12,26 @@ router.route("/").get(async (req, res) => {
   }
 });
 
-router.route("/add").post(async (req, res) => {
-  const newDeveloper = await new developer({
-    name: "Keka",
-    email: "161russ",
-    skype: "zoro",
-    telephone: "+155819",
-    status: "middle"
-  });
-
+router.route("/developerAdd").post(async (req, res) => {
+  const { devname, email, skype, telephone, status, pic } = req.body;
   try {
-    newDeveloper.save();
-    res.json("Dev added");
+    const dev = await Developer.findAll({ where: { email: email } });
+    if (dev.length) {
+      res.send(`User with this ${email} already exists`);
+      return;
+    }
+    const response = await Developer.create({
+      devname,
+      email,
+      skype,
+      telephone,
+      status,
+      pic
+    });
+    res.json(response);
   } catch (err) {
-    console.log(err);
-    res.status(400).json("Error: " + err);
+    console.log("Error: " + err);
   }
 });
-
-// router.get("/add", (req, res) => {
-//   const data = {
-//     name: "Keka",
-//     email: "zoro9443@gmail.com",
-//     skype: "zoro944",
-//     telephone: "+7212513831",
-//     status: "middle"
-//   };
-//   let { name, email, skype, telephone, status } = data;
-
-//   //Insert into table
-//   developer
-//     .create({
-//       name,
-//       email,
-//       skype,
-//       telephone,
-//       status
-//     })
-//     .then(crm => res.send("KUKU"))
-//     .catch(err => console.log(err));
-// });
-
-// const newDeveloper = await new Developer({
-//   name,
-//   email,
-//   skype,
-//   telephone,
-//   status
-// });
-// try {
-//   newDeveloper.save();
-//   res.json("Developer added!");
-// } catch (err) {
-//   console.log(err);
-//   res.status(400).json("Error: " + err);
-// }
 
 module.exports = router;

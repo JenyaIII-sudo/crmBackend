@@ -3,6 +3,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const database = require("./config/database");
+const cors = require("cors");
 
 database
   .authenticate()
@@ -15,10 +16,19 @@ database
 
 const app = express();
 
-const PORT = process.env.PORT || 3000;
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+app.use(cors());
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`SERVER STARTED on PORT ${PORT}`));
 
-app.get("/", (req, res) => res.send("index"));
+app.get("/devs", require("./routes/developers"));
+app.get("/projs", require("./routes/projects"));
 app.use("/developers", require("./routes/developers"));
+app.use("/projects", require("./routes/projects"));
 
 module.exports = app;

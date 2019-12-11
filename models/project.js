@@ -1,22 +1,17 @@
 const Sequelize = require("sequelize");
 const database = require("../config/database");
 
-const developer = database.define("developer", {
-  devname: {
+const project = database.define("project", {
+  projectname: {
     type: Sequelize.STRING
   },
-  email: {
-    type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      isEmail: true
-    },
-    unique: true
-  },
-  skype: {
+  rate: {
     type: Sequelize.STRING
   },
-  telephone: {
+  hoursperweek: {
+    type: Sequelize.STRING
+  },
+  projectinfo: {
     type: Sequelize.STRING
   },
   status: {
@@ -27,10 +22,7 @@ const developer = database.define("developer", {
   },
   updatedAt: {
     type: Sequelize.DATE
-  },
-  pic: {
-    type: Sequelize.STRING
   }
 });
 
-module.exports = developer;
+module.exports = project;
