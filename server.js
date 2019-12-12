@@ -26,8 +26,6 @@ app.use(cors());
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`SERVER STARTED on PORT ${PORT}`));
 
-app.get("/devs", require("./routes/developers"));
-app.get("/projs", require("./routes/projects"));
 app.use("/developers", require("./routes/developers"));
 app.use("/projects", require("./routes/projects"));
 

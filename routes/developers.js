@@ -34,4 +34,17 @@ router.route("/developerAdd").post(async (req, res) => {
   }
 });
 
+router.route("/delete/:id").delete(async (req, res) => {
+  try {
+    const developer = await Developer.destroy({ where: { id: req.params.id } });
+    if (!developer) {
+      res.send("There is no such developer in the DB");
+      return;
+    }
+    res.json("Developer deleted");
+  } catch (err) {
+    console.log("Error: " + err);
+  }
+});
+
 module.exports = router;
