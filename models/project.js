@@ -17,6 +17,9 @@ const project = database.define("project", {
   status: {
     type: Sequelize.STRING
   },
+  developers: {
+    type: Sequelize.STRING
+  },
   createdAt: {
     type: Sequelize.DATE
   },

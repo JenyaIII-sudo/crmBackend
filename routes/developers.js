@@ -47,4 +47,24 @@ router.route("/delete/:id").delete(async (req, res) => {
   }
 });
 
+router.route("/update/:id").put(async (req, res) => {
+  const { devname, email, skype, telephone, status, pic } = req.body;
+  console.log("DEVVNAME", pic);
+
+  try {
+    const dev = await Developer.findOne({ where: { id: req.params.id } });
+    if (!dev) {
+      res.send("There is no such project in the DB");
+      return;
+    }
+    const developer = await Developer.update(
+      { devname, email, skype, telephone, status, pic },
+      { returning: true, where: { id: req.params.id } }
+    );
+    res.json(developer);
+  } catch (err) {
+    console.log("Error: " + err);
+  }
+});
+
 module.exports = router;
