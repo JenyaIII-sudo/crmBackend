@@ -13,7 +13,7 @@ router.route("/devs").get(async (req, res) => {
 });
 
 router.route("/developerAdd").post(async (req, res) => {
-  const { devname, email, skype, telephone, status, pic } = req.body;
+  const { devname, email, skype, telephone, status, pic, about } = req.body;
   try {
     const dev = await Developer.findAll({ where: { email: email } });
     if (dev.length) {
@@ -26,7 +26,8 @@ router.route("/developerAdd").post(async (req, res) => {
       skype,
       telephone,
       status,
-      pic
+      pic,
+      about
     });
     res.json(response);
   } catch (err) {
@@ -48,7 +49,7 @@ router.route("/delete/:id").delete(async (req, res) => {
 });
 
 router.route("/update/:id").put(async (req, res) => {
-  const { devname, email, skype, telephone, status, pic } = req.body;
+  const { devname, email, skype, telephone, status, pic, about } = req.body;
   console.log("DEVVNAME", pic);
 
   try {
@@ -58,7 +59,7 @@ router.route("/update/:id").put(async (req, res) => {
       return;
     }
     const developer = await Developer.update(
-      { devname, email, skype, telephone, status, pic },
+      { devname, email, skype, telephone, status, pic, about },
       { returning: true, where: { id: req.params.id } }
     );
     res.json(developer);

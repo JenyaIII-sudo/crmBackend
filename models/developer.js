@@ -30,6 +30,9 @@ const developer = database.define("developer", {
   },
   pic: {
     type: Sequelize.STRING
+  },
+  about: {
+    type: Sequelize.STRING
   }
 });
 
