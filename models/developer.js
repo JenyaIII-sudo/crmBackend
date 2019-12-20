@@ -3,7 +3,8 @@ const database = require("../config/database");
 
 const developer = database.define("developer", {
   devname: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    required: true
   },
   email: {
     type: Sequelize.STRING,
@@ -11,6 +12,9 @@ const developer = database.define("developer", {
     validate: {
       isEmail: true
     },
+    required: true,
+    min: 6,
+    max: 256,
     unique: true
   },
   skype: {
@@ -33,6 +37,11 @@ const developer = database.define("developer", {
   },
   about: {
     type: Sequelize.STRING
+  },
+  password: {
+    type: Sequelize.STRING,
+    required: true,
+    min: 6
   }
 });
 
