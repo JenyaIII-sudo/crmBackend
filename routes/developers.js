@@ -74,7 +74,7 @@ router.route("/update/:id").put(async (req, res) => {
 
 // Registration new Developer
 router.route("/register").post(async (req, res) => {
-  const { devname, email, password } = req.body;
+  const { devname, email, password, pic } = req.body;
 
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -91,7 +91,8 @@ router.route("/register").post(async (req, res) => {
     const response = await Developer.create({
       devname,
       email,
-      password: hashedPassword
+      password: hashedPassword,
+      pic
     });
     res.json(response);
   } catch (err) {
