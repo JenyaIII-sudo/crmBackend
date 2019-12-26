@@ -21,7 +21,8 @@ const developer = database.define("developer", {
     type: Sequelize.STRING
   },
   telephone: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    validate: { min: 6, max: 11 }
   },
   status: {
     type: Sequelize.STRING
