@@ -4,7 +4,6 @@ const dataBase = process.env.DB_DATABASE;
 const dbUser = process.env.DB_USER;
 const dbUserPass = process.env.DB_PASSWORD;
 const dbHost = process.env.DB_HOST;
-const dbPort = process.env.DB_PORT;
 
 module.exports = new Sequelize(dataBase, dbUser, dbUserPass, {
   host: dbHost,
