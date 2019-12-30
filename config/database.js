@@ -8,7 +8,6 @@ const dbHost = process.env.DB_HOST;
 module.exports = new Sequelize(dataBase, dbUser, dbUserPass, {
   host: dbHost,
   dialect: "postgres",
-
   pool: {
     max: 5,
     min: 0,

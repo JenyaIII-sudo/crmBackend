@@ -26,8 +26,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-const HOST = process.env.DB_HOST;
-app.listen(HOST, console.log(`SERVER STARTED on ${HOST}`));
+const PORT = process.env.DB_PORT;
+app.listen(PORT, console.log(`SERVER STARTED on ${PORT}`));
 
 app.use("/developers", require("./routes/developers"));
 app.use("/projects", require("./routes/projects"));
