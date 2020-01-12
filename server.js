@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({
 // parse application/json
 app.use(bodyParser.json());
 
-const PORT = process.env.DB_PORT;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, console.log(`SERVER STARTED on ${PORT}`));
 
 app.use("/developers", require("./routes/developers"));
