@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const dotenv = require("dotenv");
 const logger = require("morgan");
 const database = require("./config/database");
-// const cors = require("cors");
+const cors = require("cors");
 
 dotenv.config();
 
@@ -18,6 +18,7 @@ database
   });
 
 const app = express();
+app.use(cors());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -26,7 +27,6 @@ app.use(bodyParser.urlencoded({
 
 // parse application/json
 app.use(bodyParser.json());
-// app.use(cors());
 
 const PORT = process.env.DB_PORT;
 app.listen(PORT, console.log(`SERVER STARTED on ${PORT}`));
